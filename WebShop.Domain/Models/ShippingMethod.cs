@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WebShop.Domain.Models.Enums
+namespace WebShop.Domain.Models
 {
     public class ShippingMethod : BaseEntity
     {

@@ -1,0 +1,42 @@
+using WebShop.Domain.Models;
+
+namespace WebShop.Domain.RepositoryInterfaces;
+
+/// <summary>
+/// Defines repository operations for managing <see cref="ProductAttribute"/> entities.
+/// </summary>
+public interface IProductAttributeRepository
+{
+    /// <summary>
+    /// Adds a new product attribute to the repository.
+    /// </summary>
+    /// <param name="attribute">The product attribute to add.</param>
+    /// <returns>The identifier of the newly added product attribute.</returns>
+    int Add(ProductAttribute attribute);
+
+    /// <summary>
+    /// Retrieves a queryable collection of product attributes for a given product.
+    /// </summary>
+    /// <param name="productId">The product identifier to filter by.</param>
+    /// <returns>An <see cref="IQueryable{ProductAttribute}"/> representing the product attributes.</returns>
+    IQueryable<ProductAttribute> Browse(int productId);
+
+    /// <summary>
+    /// Deletes the product attribute with the specified identifier.
+    /// </summary>
+    /// <param name="id">The identifier of the product attribute to delete.</param>
+    void Delete(int id);
+
+    /// <summary>
+    /// Retrieves the product attribute with the specified identifier.
+    /// </summary>
+    /// <param name="id">The identifier of the product attribute to retrieve.</param>
+    /// <returns>The <see cref="ProductAttribute"/> if found; otherwise, <c>null</c>.</returns>
+    ProductAttribute? Get(int id);
+
+    /// <summary>
+    /// Updates the specified product attribute in the repository.
+    /// </summary>
+    /// <param name="attribute">The product attribute to update.</param>
+    void Update(ProductAttribute attribute);
+}

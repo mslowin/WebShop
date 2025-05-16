@@ -12,8 +12,8 @@ namespace WebShop.Domain.Models
         public string OrderNumber { get; set; } = string.Empty;
         public DateTime OrderDate { get; set; } = DateTime.UtcNow;
         public OrderStatus Status { get; set; } = OrderStatus.Pending;
-        public decimal TotalGross { get; set; }
-        public decimal TotalNet { get; set; }
+        public decimal TotalGross { get; set; } // suma wszystkiego brutto
+        public decimal TotalNet { get; set; } // suma wszystkiego netto
         public decimal TaxAmount { get; set; }
         public string? TrackingNumber { get; set; } // numer śledzenia przesyłki
 

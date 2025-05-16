@@ -9,6 +9,7 @@ namespace WebShop.Domain.Models
 {
     public class Customer : BaseEntity
     {
+        //TODO: sprawdzić potem, czy mogęsię odwołać do koszyka tak po prostu
         public string FirstName { get; set; } = string.Empty;
         public string LastName { get; set; } = string.Empty;
         public string Email { get; set; } = string.Empty;
