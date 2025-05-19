@@ -1,17 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace WebShop.Domain.Models.Enums;
 
-namespace WebShop.Domain.Models.Enums
+public enum OrderStatus
 {
-    public enum OrderStatus
-    {
-        Pending,
-        Processing,
-        Shipped,
-        Delivered,
-        Cancelled
-    }
+    Pending,
+    Processing,
+    Shipped,
+    Delivered,
+    Cancelled
 }

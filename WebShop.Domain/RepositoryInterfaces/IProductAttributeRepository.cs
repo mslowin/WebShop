@@ -15,19 +15,6 @@ public interface IProductAttributeRepository
     int Add(ProductAttribute attribute);
 
     /// <summary>
-    /// Retrieves a queryable collection of product attributes for a given product.
-    /// </summary>
-    /// <param name="productId">The product identifier to filter by.</param>
-    /// <returns>An <see cref="IQueryable{ProductAttribute}"/> representing the product attributes.</returns>
-    IQueryable<ProductAttribute> Browse(int productId);
-
-    /// <summary>
-    /// Deletes the product attribute with the specified identifier.
-    /// </summary>
-    /// <param name="id">The identifier of the product attribute to delete.</param>
-    void Delete(int id);
-
-    /// <summary>
     /// Retrieves the product attribute with the specified identifier.
     /// </summary>
     /// <param name="id">The identifier of the product attribute to retrieve.</param>
@@ -35,8 +22,21 @@ public interface IProductAttributeRepository
     ProductAttribute? Get(int id);
 
     /// <summary>
+    /// Retrieves a queryable collection of product attributes for a given product.
+    /// </summary>
+    /// <param name="productId">The product identifier to filter by.</param>
+    /// <returns>An <see cref="IQueryable{ProductAttribute}"/> representing the product attributes.</returns>
+    IQueryable<ProductAttribute> Browse(int productId);
+
+    /// <summary>
     /// Updates the specified product attribute in the repository.
     /// </summary>
     /// <param name="attribute">The product attribute to update.</param>
     void Update(ProductAttribute attribute);
+
+    /// <summary>
+    /// Deletes the product attribute with the specified identifier.
+    /// </summary>
+    /// <param name="id">The identifier of the product attribute to delete.</param>
+    void Delete(int id);
 }

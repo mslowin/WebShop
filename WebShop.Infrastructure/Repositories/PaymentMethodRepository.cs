@@ -24,9 +24,22 @@ public class PaymentMethodRepository : IPaymentMethodRepository
     }
 
     /// <inheritdoc/>
+    public PaymentMethod? Get(int id)
+    {
+        return _context.PaymentMethods.Find(id);
+    }
+
+    /// <inheritdoc/>
     public IQueryable<PaymentMethod> Browse()
     {
         return _context.PaymentMethods.AsQueryable();
+    }
+
+    /// <inheritdoc/>
+    public void Update(PaymentMethod paymentMethod)
+    {
+        _context.PaymentMethods.Update(paymentMethod);
+        _context.SaveChanges();
     }
 
     /// <inheritdoc/>
@@ -38,18 +51,5 @@ public class PaymentMethodRepository : IPaymentMethodRepository
             _context.PaymentMethods.Remove(paymentMethod);
             _context.SaveChanges();
         }
-    }
-
-    /// <inheritdoc/>
-    public PaymentMethod? Get(int id)
-    {
-        return _context.PaymentMethods.Find(id);
-    }
-
-    /// <inheritdoc/>
-    public void Update(PaymentMethod paymentMethod)
-    {
-        _context.PaymentMethods.Update(paymentMethod);
-        _context.SaveChanges();
     }
 }

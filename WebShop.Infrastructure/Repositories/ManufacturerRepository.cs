@@ -24,9 +24,22 @@ public class ManufacturerRepository : IManufacturerRepository
     }
 
     /// <inheritdoc/>
+    public Manufacturer? Get(int id)
+    {
+        return _context.Manufacturers.Find(id);
+    }
+
+    /// <inheritdoc/>
     public IQueryable<Manufacturer> Browse()
     {
         return _context.Manufacturers.AsQueryable();
+    }
+
+    /// <inheritdoc/>
+    public void Update(Manufacturer manufacturer)
+    {
+        _context.Manufacturers.Update(manufacturer);
+        _context.SaveChanges();
     }
 
     /// <inheritdoc/>
@@ -38,18 +51,5 @@ public class ManufacturerRepository : IManufacturerRepository
             _context.Manufacturers.Remove(manufacturer);
             _context.SaveChanges();
         }
-    }
-
-    /// <inheritdoc/>
-    public Manufacturer? Get(int id)
-    {
-        return _context.Manufacturers.Find(id);
-    }
-
-    /// <inheritdoc/>
-    public void Update(Manufacturer manufacturer)
-    {
-        _context.Manufacturers.Update(manufacturer);
-        _context.SaveChanges();
     }
 }

@@ -15,18 +15,6 @@ public interface ICategoryRepository
     int Add(Category category);
 
     /// <summary>
-    /// Retrieves a queryable collection of categories.
-    /// </summary>
-    /// <returns>An <see cref="IQueryable{Category}"/> representing all categories.</returns>
-    IQueryable<Category> Browse();
-
-    /// <summary>
-    /// Deletes the category with the specified identifier.
-    /// </summary>
-    /// <param name="id">The identifier of the category to delete.</param>
-    void Delete(int id);
-
-    /// <summary>
     /// Retrieves the category with the specified identifier.
     /// </summary>
     /// <param name="id">The identifier of the category to retrieve.</param>
@@ -34,8 +22,20 @@ public interface ICategoryRepository
     Category? Get(int id);
 
     /// <summary>
+    /// Retrieves a queryable collection of categories.
+    /// </summary>
+    /// <returns>An <see cref="IQueryable{Category}"/> representing all categories.</returns>
+    IQueryable<Category> Browse();
+
+    /// <summary>
     /// Updates the specified category in the repository.
     /// </summary>
     /// <param name="category">The category to update.</param>
     void Update(Category category);
+
+    /// <summary>
+    /// Deletes the category with the specified identifier.
+    /// </summary>
+    /// <param name="id">The identifier of the category to delete.</param>
+    void Delete(int id);
 }

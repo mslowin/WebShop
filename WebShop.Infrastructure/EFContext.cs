@@ -68,5 +68,11 @@ public class EFContext : IdentityDbContext
             .WithMany()
             .HasForeignKey(o => o.BillingAddressId)
             .OnDelete(DeleteBehavior.Restrict);
+
+        builder.Entity<Customer>()
+            .HasOne(c => c.Cart)
+            .WithOne(c => c.Customer)
+            .HasForeignKey<Cart>(c => c.CustomerId)
+            .IsRequired(false);
     }
 }

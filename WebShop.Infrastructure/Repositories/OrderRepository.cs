@@ -24,9 +24,22 @@ public class OrderRepository : IOrderRepository
     }
 
     /// <inheritdoc/>
+    public Order? Get(int id)
+    {
+        return _context.Orders.Find(id);
+    }
+
+    /// <inheritdoc/>
     public IQueryable<Order> Browse()
     {
         return _context.Orders.AsQueryable();
+    }
+
+    /// <inheritdoc/>
+    public void Update(Order order)
+    {
+        _context.Orders.Update(order);
+        _context.SaveChanges();
     }
 
     /// <inheritdoc/>
@@ -38,18 +51,5 @@ public class OrderRepository : IOrderRepository
             _context.Orders.Remove(order);
             _context.SaveChanges();
         }
-    }
-
-    /// <inheritdoc/>
-    public Order? Get(int id)
-    {
-        return _context.Orders.Find(id);
-    }
-
-    /// <inheritdoc/>
-    public void Update(Order order)
-    {
-        _context.Orders.Update(order);
-        _context.SaveChanges();
     }
 }

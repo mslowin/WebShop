@@ -24,9 +24,22 @@ public class CategoryRepository : ICategoryRepository
     }
 
     /// <inheritdoc/>
+    public Category? Get(int id)
+    {
+        return _context.Categories.Find(id);
+    }
+
+    /// <inheritdoc/>
     public IQueryable<Category> Browse()
     {
         return _context.Categories.AsQueryable();
+    }
+
+    /// <inheritdoc/>
+    public void Update(Category category)
+    {
+        _context.Categories.Update(category);
+        _context.SaveChanges();
     }
 
     /// <inheritdoc/>
@@ -38,18 +51,5 @@ public class CategoryRepository : ICategoryRepository
             _context.Categories.Remove(category);
             _context.SaveChanges();
         }
-    }
-
-    /// <inheritdoc/>
-    public Category? Get(int id)
-    {
-        return _context.Categories.Find(id);
-    }
-
-    /// <inheritdoc/>
-    public void Update(Category category)
-    {
-        _context.Categories.Update(category);
-        _context.SaveChanges();
     }
 }

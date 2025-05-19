@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebShop.Infrastructure;
 
@@ -11,9 +12,11 @@ using WebShop.Infrastructure;
 namespace WebShop.Infrastructure.Migrations
 {
     [DbContext(typeof(EFContext))]
-    partial class EFContextModelSnapshot : ModelSnapshot
+    [Migration("20250519100803_AddCartReferenceInCustomer")]
+    partial class AddCartReferenceInCustomer
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -294,7 +297,7 @@ namespace WebShop.Infrastructure.Migrations
                     b.Property<string>("CreatedBy")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("CustomerId")
+                    b.Property<int>("CustomerId")
                         .HasColumnType("int");
 
                     b.Property<bool>("IsDeleted")
@@ -306,8 +309,7 @@ namespace WebShop.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("CustomerId")
-                        .IsUnique()
-                        .HasFilter("[CustomerId] IS NOT NULL");
+                        .IsUnique();
 
                     b.ToTable("Carts");
                 });
@@ -869,7 +871,9 @@ namespace WebShop.Infrastructure.Migrations
                 {
                     b.HasOne("WebShop.Domain.Models.Customer", "Customer")
                         .WithOne("Cart")
-                        .HasForeignKey("WebShop.Domain.Models.Cart", "CustomerId");
+                        .HasForeignKey("WebShop.Domain.Models.Cart", "CustomerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Customer");
                 });

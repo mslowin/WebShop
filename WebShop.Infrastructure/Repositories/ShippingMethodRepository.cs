@@ -24,9 +24,22 @@ public class ShippingMethodRepository : IShippingMethodRepository
     }
 
     /// <inheritdoc/>
+    public ShippingMethod? Get(int id)
+    {
+        return _context.ShippingMethods.Find(id);
+    }
+
+    /// <inheritdoc/>
     public IQueryable<ShippingMethod> Browse()
     {
         return _context.ShippingMethods.AsQueryable();
+    }
+
+    /// <inheritdoc/>
+    public void Update(ShippingMethod shippingMethod)
+    {
+        _context.ShippingMethods.Update(shippingMethod);
+        _context.SaveChanges();
     }
 
     /// <inheritdoc/>
@@ -38,18 +51,5 @@ public class ShippingMethodRepository : IShippingMethodRepository
             _context.ShippingMethods.Remove(shippingMethod);
             _context.SaveChanges();
         }
-    }
-
-    /// <inheritdoc/>
-    public ShippingMethod? Get(int id)
-    {
-        return _context.ShippingMethods.Find(id);
-    }
-
-    /// <inheritdoc/>
-    public void Update(ShippingMethod shippingMethod)
-    {
-        _context.ShippingMethods.Update(shippingMethod);
-        _context.SaveChanges();
     }
 }

@@ -24,9 +24,22 @@ public class ProductAttributeRepository : IProductAttributeRepository
     }
 
     /// <inheritdoc/>
+    public ProductAttribute? Get(int id)
+    {
+        return _context.ProductAttributes.Find(id);
+    }
+
+    /// <inheritdoc/>
     public IQueryable<ProductAttribute> Browse(int productId)
     {
         return _context.ProductAttributes.Where(a => a.ProductId == productId);
+    }
+
+    /// <inheritdoc/>
+    public void Update(ProductAttribute attribute)
+    {
+        _context.ProductAttributes.Update(attribute);
+        _context.SaveChanges();
     }
 
     /// <inheritdoc/>
@@ -38,18 +51,5 @@ public class ProductAttributeRepository : IProductAttributeRepository
             _context.ProductAttributes.Remove(attribute);
             _context.SaveChanges();
         }
-    }
-
-    /// <inheritdoc/>
-    public ProductAttribute? Get(int id)
-    {
-        return _context.ProductAttributes.Find(id);
-    }
-
-    /// <inheritdoc/>
-    public void Update(ProductAttribute attribute)
-    {
-        _context.ProductAttributes.Update(attribute);
-        _context.SaveChanges();
     }
 }

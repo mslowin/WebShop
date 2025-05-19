@@ -13,22 +13,22 @@ public interface IShippingMethodRepository
     int Add(ShippingMethod shippingMethod);
 
     /// <summary>
-    /// Retrieves a queryable collection of shipping methods.
-    /// </summary>
-    IQueryable<ShippingMethod> Browse();
-
-    /// <summary>
-    /// Deletes the shipping method with the specified identifier.
-    /// </summary>
-    void Delete(int id);
-
-    /// <summary>
     /// Retrieves the shipping method with the specified identifier.
     /// </summary>
     ShippingMethod? Get(int id);
 
     /// <summary>
+    /// Retrieves a queryable collection of shipping methods.
+    /// </summary>
+    IQueryable<ShippingMethod> Browse();
+
+    /// <summary>
     /// Updates the specified shipping method in the repository.
     /// </summary>
     void Update(ShippingMethod shippingMethod);
+
+    /// <summary>
+    /// Deletes the shipping method with the specified identifier.
+    /// </summary>
+    void Delete(int id);
 }

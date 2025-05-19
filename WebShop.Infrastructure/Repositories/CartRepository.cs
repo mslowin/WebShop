@@ -24,9 +24,22 @@ public class CartRepository : ICartRepository
     }
 
     /// <inheritdoc/>
+    public Cart? Get(int id)
+    {
+        return _context.Carts.Find(id);
+    }
+
+    /// <inheritdoc/>
     public IQueryable<Cart> Browse()
     {
         return _context.Carts.AsQueryable();
+    }
+
+    /// <inheritdoc/>
+    public void Update(Cart cart)
+    {
+        _context.Carts.Update(cart);
+        _context.SaveChanges();
     }
 
     /// <inheritdoc/>
@@ -38,18 +51,5 @@ public class CartRepository : ICartRepository
             _context.Carts.Remove(cart);
             _context.SaveChanges();
         }
-    }
-
-    /// <inheritdoc/>
-    public Cart? Get(int id)
-    {
-        return _context.Carts.Find(id);
-    }
-
-    /// <inheritdoc/>
-    public void Update(Cart cart)
-    {
-        _context.Carts.Update(cart);
-        _context.SaveChanges();
     }
 }

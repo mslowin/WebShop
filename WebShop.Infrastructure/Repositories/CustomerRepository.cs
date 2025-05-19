@@ -24,9 +24,22 @@ public class CustomerRepository : ICustomerRepository
     }
 
     /// <inheritdoc/>
+    public Customer? Get(int id)
+    {
+        return _context.Customers.Find(id);
+    }
+
+    /// <inheritdoc/>
     public IQueryable<Customer> Browse()
     {
         return _context.Customers.AsQueryable();
+    }
+
+    /// <inheritdoc/>
+    public void Update(Customer customer)
+    {
+        _context.Customers.Update(customer);
+        _context.SaveChanges();
     }
 
     /// <inheritdoc/>
@@ -38,18 +51,5 @@ public class CustomerRepository : ICustomerRepository
             _context.Customers.Remove(customer);
             _context.SaveChanges();
         }
-    }
-
-    /// <inheritdoc/>
-    public Customer? Get(int id)
-    {
-        return _context.Customers.Find(id);
-    }
-
-    /// <inheritdoc/>
-    public void Update(Customer customer)
-    {
-        _context.Customers.Update(customer);
-        _context.SaveChanges();
     }
 }
