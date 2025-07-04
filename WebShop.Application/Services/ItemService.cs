@@ -9,4 +9,9 @@ public class ItemService : IItemService
         List<int> ints = [ 1, 2, 3 ];
         return ints;
     }
+
+    public int GetItems(int id)
+    {
+        return 1;
+    }
 }

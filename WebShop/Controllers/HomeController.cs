@@ -18,14 +18,60 @@ namespace WebShop.Controllers
 
         public IActionResult Index()
         {
+            var entities = new List<Entity>();
+            for (int i = 0; i < 10; i++)
+            {
+                entities.Add(new Entity { Id = i, Name = $"Item {i}", Type = "Grocery" });
+            }
+            TempData["Entities"] = System.Text.Json.JsonSerializer.Serialize(entities);
             return View();
         }
 
         public IActionResult ViewListOfItems()
         {
-            var items = _itemService.GetItems();
             _logger.LogInformation("Listed all items");
-            return View(items);
+            var entitiesJson = TempData["Entities"] as string;
+            if (entitiesJson == null)
+            {
+                return NotFound();
+            }
+
+            var entities = System.Text.Json.JsonSerializer.Deserialize<List<Entity>>(entitiesJson);
+            TempData["Entities"] = System.Text.Json.JsonSerializer.Serialize(entities);
+            return View(entities);
+        }
+
+        public IActionResult InspectItem(int id)
+        {
+            var entitiesJson = TempData["Entities"] as string;
+            if (entitiesJson == null)
+            {
+                return NotFound();
+            }
+
+            var entities = System.Text.Json.JsonSerializer.Deserialize<List<Entity>>(entitiesJson);
+            TempData["Entities"] = System.Text.Json.JsonSerializer.Serialize(entities);
+            var item = entities?.Find(e => e.Id == id);
+            if (item == null)
+            {
+                return NotFound();
+            }
+            return View(item);
+        }
+
+        // DeleteItem
+        public IActionResult DeleteItem(int id)
+        {
+            var entitiesJson = TempData["Entities"] as string;
+            if (entitiesJson == null)
+            {
+                return NotFound();
+            }
+
+            var entities = System.Text.Json.JsonSerializer.Deserialize<List<Entity>>(entitiesJson);
+            entities?.RemoveAt(id);
+            TempData["Entities"] = System.Text.Json.JsonSerializer.Serialize(entities);
+            return RedirectToAction("ViewListOfItems");
         }
 
         public IActionResult Privacy()
