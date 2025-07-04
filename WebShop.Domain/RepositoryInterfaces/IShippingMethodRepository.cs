@@ -1,4 +1,4 @@
-using WebShop.Domain.Models;
+﻿using WebShop.Domain.Models;
 
 namespace WebShop.Domain.RepositoryInterfaces;
 
@@ -10,25 +10,25 @@ public interface IShippingMethodRepository
     /// <summary>
     /// Adds a new shipping method to the repository.
     /// </summary>
-    int Add(ShippingMethod shippingMethod);
+    public int Add(ShippingMethod shippingMethod);
 
     /// <summary>
     /// Retrieves the shipping method with the specified identifier.
     /// </summary>
-    ShippingMethod? Get(int id);
+    public ShippingMethod? Get(int id);
 
     /// <summary>
     /// Retrieves a queryable collection of shipping methods.
     /// </summary>
-    IQueryable<ShippingMethod> Browse();
+    public IQueryable<ShippingMethod> Browse();
 
     /// <summary>
     /// Updates the specified shipping method in the repository.
     /// </summary>
-    void Update(ShippingMethod shippingMethod);
+    public void Update(ShippingMethod shippingMethod);
 
     /// <summary>
     /// Deletes the shipping method with the specified identifier.
     /// </summary>
-    void Delete(int id);
+    public void Delete(int id);
 }

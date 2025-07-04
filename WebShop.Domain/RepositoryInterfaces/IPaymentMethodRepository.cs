@@ -1,4 +1,4 @@
-using WebShop.Domain.Models;
+﻿using WebShop.Domain.Models;
 
 namespace WebShop.Domain.RepositoryInterfaces;
 
@@ -10,25 +10,25 @@ public interface IPaymentMethodRepository
     /// <summary>
     /// Adds a new payment method to the repository.
     /// </summary>
-    int Add(PaymentMethod paymentMethod);
+    public int Add(PaymentMethod paymentMethod);
 
     /// <summary>
     /// Retrieves the payment method with the specified identifier.
     /// </summary>
-    PaymentMethod? Get(int id);
+    public PaymentMethod? Get(int id);
 
     /// <summary>
     /// Retrieves a queryable collection of payment methods.
     /// </summary>
-    IQueryable<PaymentMethod> Browse();
+    public IQueryable<PaymentMethod> Browse();
 
     /// <summary>
     /// Updates the specified payment method in the repository.
     /// </summary>
-    void Update(PaymentMethod paymentMethod);
+    public void Update(PaymentMethod paymentMethod);
 
     /// <summary>
     /// Deletes the payment method with the specified identifier.
     /// </summary>
-    void Delete(int id);
+    public void Delete(int id);
 }

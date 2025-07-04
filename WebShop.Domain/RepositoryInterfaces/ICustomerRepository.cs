@@ -1,4 +1,4 @@
-using WebShop.Domain.Models;
+﻿using WebShop.Domain.Models;
 
 namespace WebShop.Domain.RepositoryInterfaces;
 
@@ -10,25 +10,25 @@ public interface ICustomerRepository
     /// <summary>
     /// Adds a new customer to the repository.
     /// </summary>
-    int Add(Customer customer);
+    public int Add(Customer customer);
 
     /// <summary>
     /// Retrieves the customer with the specified identifier.
     /// </summary>
-    Customer? Get(int id);
+    public Customer? Get(int id);
 
     /// <summary>
     /// Retrieves a queryable collection of customers.
     /// </summary>
-    IQueryable<Customer> Browse();
+    public IQueryable<Customer> Browse();
 
     /// <summary>
     /// Updates the specified customer in the repository.
     /// </summary>
-    void Update(Customer customer);
+    public void Update(Customer customer);
 
     /// <summary>
     /// Deletes the customer with the specified identifier.
     /// </summary>
-    void Delete(int id);
+    public void Delete(int id);
 }

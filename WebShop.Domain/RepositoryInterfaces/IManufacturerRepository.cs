@@ -1,4 +1,4 @@
-using WebShop.Domain.Models;
+﻿using WebShop.Domain.Models;
 
 namespace WebShop.Domain.RepositoryInterfaces;
 
@@ -12,30 +12,30 @@ public interface IManufacturerRepository
     /// </summary>
     /// <param name="manufacturer">The manufacturer to add.</param>
     /// <returns>The identifier of the newly added manufacturer.</returns>
-    int Add(Manufacturer manufacturer);
+    public int Add(Manufacturer manufacturer);
 
     /// <summary>
     /// Retrieves the manufacturer with the specified identifier.
     /// </summary>
     /// <param name="id">The identifier of the manufacturer to retrieve.</param>
     /// <returns>The <see cref="Manufacturer"/> if found; otherwise, <c>null</c>.</returns>
-    Manufacturer? Get(int id);
+    public Manufacturer? Get(int id);
 
     /// <summary>
     /// Retrieves a queryable collection of manufacturers.
     /// </summary>
     /// <returns>An <see cref="IQueryable{Manufacturer}"/> representing all manufacturers.</returns>
-    IQueryable<Manufacturer> Browse();
+    public IQueryable<Manufacturer> Browse();
 
     /// <summary>
     /// Updates the specified manufacturer in the repository.
     /// </summary>
     /// <param name="manufacturer">The manufacturer to update.</param>
-    void Update(Manufacturer manufacturer);
+    public void Update(Manufacturer manufacturer);
 
     /// <summary>
     /// Deletes the manufacturer with the specified identifier.
     /// </summary>
     /// <param name="id">The identifier of the manufacturer to delete.</param>
-    void Delete(int id);
+    public void Delete(int id);
 }

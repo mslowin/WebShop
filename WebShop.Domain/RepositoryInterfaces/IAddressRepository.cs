@@ -1,4 +1,4 @@
-using WebShop.Domain.Models;
+﻿using WebShop.Domain.Models;
 
 namespace WebShop.Domain.RepositoryInterfaces;
 
@@ -10,25 +10,25 @@ public interface IAddressRepository
     /// <summary>
     /// Adds a new address to the repository.
     /// </summary>
-    int Add(Address address);
+    public int Add(Address address);
 
     /// <summary>
     /// Retrieves the address with the specified identifier.
     /// </summary>
-    Address? Get(int id);
+    public Address? Get(int id);
 
     /// <summary>
     /// Retrieves a queryable collection of addresses.
     /// </summary>
-    IQueryable<Address> Browse();
+    public IQueryable<Address> Browse();
 
     /// <summary>
     /// Updates the specified address in the repository.
     /// </summary>
-    void Update(Address address);
+    public void Update(Address address);
 
     /// <summary>
     /// Deletes the address with the specified identifier.
     /// </summary>
-    void Delete(int id);
+    public void Delete(int id);
 }
