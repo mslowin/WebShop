@@ -1,4 +1,4 @@
-using WebShop.Domain.Models;
+﻿using WebShop.Domain.Models;
 using WebShop.Domain.RepositoryInterfaces;
 
 namespace WebShop.Infrastructure.Repositories;
@@ -32,7 +32,7 @@ public class CustomerRepository : ICustomerRepository
     /// <inheritdoc/>
     public IQueryable<Customer> Browse()
     {
-        return _context.Customers.AsQueryable();
+        return _context.Customers.Where(c => !c.IsDeleted).AsQueryable();
     }
 
     /// <inheritdoc/>

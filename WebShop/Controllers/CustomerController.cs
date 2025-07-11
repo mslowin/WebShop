@@ -15,7 +15,7 @@ namespace WebShop.Controllers
             // serwis będzie musiał przygotować dane
             // serwis musi zwrócić dane w odpowiednim formacie
 
-            var model = CustomerService.Browse();
+            var model = CustomerService.BrowseAllCustomersForList();
             return View(model);
         }
 
