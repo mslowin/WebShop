@@ -1,9 +1,18 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using WebShop.Application.Interfaces;
+using WebShop.Application.ViewModels.Customer;
 
 namespace WebShop.Controllers
 {
     public class CustomerController : Controller
     {
+        private readonly ICustomerService _customerService;
+
+        public CustomerController(ICustomerService customerService)
+        {
+            _customerService = customerService;
+        }
+
         public IActionResult Index()
         {
             // utworzyć widok dla tej akcji
@@ -15,7 +24,7 @@ namespace WebShop.Controllers
             // serwis będzie musiał przygotować dane
             // serwis musi zwrócić dane w odpowiednim formacie
 
-            var model = CustomerService.BrowseAllCustomersForList();
+            var model = _customerService.BrowseAllCustomersForList();
             return View(model);
         }
 
@@ -27,40 +36,40 @@ namespace WebShop.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddCustomer(CustomerModel customer)
+        public IActionResult AddCustomer(NewCustomerVm customer)
         {
             if (ModelState.IsValid)
             {
-                var id = CustomerService.Add(customer);
+                var id = _customerService.AddNewCustomer(customer);
                 return RedirectToAction("Index");
             }
             return View(customer);
         }
 
-        [HttpGet]
-        public IActionResult AddNewAddressForClient(int customerId)
-        {
-            // zwraca widok z formularzem tworzenia nowego adresu dla klienta
-            var model = new AddressModel { CustomerId = customerId };
-            return View(model);
-        }
+        ////[HttpGet]
+        ////public IActionResult AddNewAddressForClient(int customerId)
+        ////{
+        ////    // zwraca widok z formularzem tworzenia nowego adresu dla klienta
+        ////    var model = new AddressModel { CustomerId = customerId };
+        ////    return View(model);
+        ////}
 
-        [HttpPost]
-        public IActionResult AddNewAddressForClient(AddressModel address)
-        {
-            if (ModelState.IsValid)
-            {
-                var id = CustomerService.AddAddress(address);
-                return RedirectToAction("Index");
-            }
-            return View(address);
-        }
+        ////[HttpPost]
+        ////public IActionResult AddNewAddressForClient(AddressModel address)
+        ////{
+        ////    if (ModelState.IsValid)
+        ////    {
+        ////        var id = _customerService.AddAddress(address);
+        ////        return RedirectToAction("Index");
+        ////    }
+        ////    return View(address);
+        ////}
 
         [HttpGet]
         public IActionResult ViewCustomer(int customerId)
         {
             // zwraca widok z danymi klienta
-            var customer = CustomerService.GetById(customerId);
+            var customer = _customerService.GetCustomerDetails(customerId);
             if (customer == null)
             {
                 return NotFound();

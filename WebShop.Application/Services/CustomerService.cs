@@ -19,6 +19,12 @@ namespace WebShop.Application.Services
 
         private readonly IMapper _mapper;
 
+        public CustomerService(ICustomerRepository customerRepository, IMapper mapper)
+        {
+            _customerRepository = customerRepository;
+            _mapper = mapper;
+        }
+
         public int AddNewCustomer(NewCustomerVm customer)
         {
             throw new NotImplementedException();
