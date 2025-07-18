@@ -5,6 +5,8 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
+using WebShop.Application.ViewModels.Customer;
+using WebShop.Domain.Models;
 
 namespace WebShop.Application.Mapping
 {
@@ -12,20 +14,12 @@ namespace WebShop.Application.Mapping
     {
         public MappingProfile()
         {
-            // Add your mappings here
-            // For example: CreateMap<Source, Destination>();
-            ApplyMappingFromAssembly(Assembly.GetExecutingAssembly());
-        }
+            CreateMap<Customer, CustomerForListVm>();
 
-        private void ApplyMappingFromAssembly(Assembly assembly)
-        {
-            var types = assembly.GetExportedTypes()
-                .Where(t => t.GetInterfaces().Any(i => i.IsGenericType && i.GetGenericTypeDefinition() == typeof(IMapFrom<>)));
-            foreach (var type in types)
-            {
-                var instance = Activator.CreateInstance(type) as IMapFrom<object>;
-                instance?.Mapping(this);
-            }
+            CreateMap<Customer, CustomerDetailsVm>()
+                .ForMember(dest => dest.CustomerFullName, opt => opt.MapFrom(src => $"{src.FirstName} {src.LastName}"))
+                .ForMember(dest => dest.CEOFullName, opt => opt.MapFrom(src => $"{src.CEOName} {src.CEOLastName}"))
+                .ForMember(dest => dest.Addresses, opt => opt.MapFrom(src => src.Addresses));
         }
     }
 }

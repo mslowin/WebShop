@@ -5,18 +5,14 @@ using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using WebShop.Application.Mapping;
+using WebShop.Domain.Models;
 
 namespace WebShop.Application.ViewModels.Customer
 {
-    public class CustomerForListVm : IMapFrom<Domain.Models.Customer>
+    public class CustomerForListVm
     {
         public int Id { get; set; }
         public string? CompanyName { get; set; }
         public string? Nip { get; set; }
-
-        public void Mapping(Profile profile)
-        {
-            profile.CreateMap<Domain.Models.Customer, CustomerForListVm>();
-        }
     }
 }

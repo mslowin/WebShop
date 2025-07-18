@@ -68,12 +68,12 @@ namespace WebShop.Controllers
         [HttpGet]
         public IActionResult ViewCustomer(int customerId)
         {
-            // zwraca widok z danymi klienta
             var customer = _customerService.GetCustomerDetails(customerId);
             if (customer == null)
             {
                 return NotFound();
             }
+
             return View(customer);
         }
     }

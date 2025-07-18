@@ -1,11 +1,4 @@
-﻿@model IEnumerable<WebShop.Application.ViewModels.Customer.ListCustomerForListVm>
-
-    // ___________________________________________________________________
-
-    LEKACJA SKOŃCZONA NA 5:30
-
-    // ___________________________________________________________________
-
+﻿@model WebShop.Application.ViewModels.Customer.ListCustomerForListVm
 @{
     ViewData["Title"] = "Index";
 }
@@ -19,21 +12,33 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Count)
+                Id
+            </th>
+            <th>
+                Name
+            </th>
+            <th>
+                Nip
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+@foreach (var item in Model.Customers) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Count)
+                @Html.DisplayFor(modelItem => item.Id)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                @Html.DisplayFor(modelItem => item.CompanyName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nip)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
             </td>
         </tr>
 }

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.WebSockets;
-using System.Text;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using WebShop.Application.Interfaces;
 using WebShop.Application.ViewModels.Address;
@@ -16,7 +10,6 @@ namespace WebShop.Application.Services
     public class CustomerService : ICustomerService
     {
         private readonly ICustomerRepository _customerRepository;
-
         private readonly IMapper _mapper;
 
         public CustomerService(ICustomerRepository customerRepository, IMapper mapper)
@@ -25,12 +18,12 @@ namespace WebShop.Application.Services
             _mapper = mapper;
         }
 
-        public int AddNewCustomer(NewCustomerVm customer)
+        public int AddNewCustomer(NewCustomerVm customerVm)
         {
             throw new NotImplementedException();
         }
 
-        public int AddNewAddress(AddressForListVm address)
+        public int AddNewAddress(AddressForListVm addressVm)
         {
             throw new NotImplementedException();
         }

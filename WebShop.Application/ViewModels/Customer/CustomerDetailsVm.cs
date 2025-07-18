@@ -10,7 +10,7 @@ using WebShop.Domain.Models;
 
 namespace WebShop.Application.ViewModels.Customer
 {
-    public class CustomerDetailsVm : IMapFrom<Domain.Models.Customer>
+    public class CustomerDetailsVm
     {
         public int Id { get; set; }
         public string CustomerFullName { get; set; } = string.Empty;
@@ -22,13 +22,5 @@ namespace WebShop.Application.ViewModels.Customer
         public string Regon { get; set; } = string.Empty;
         public byte[] LogoPic { get; set; } = [];
         public List<AddressForListVm> Addresses { get; set; } = [];
-
-        public void Mapping(Profile profile)
-        {
-            profile.CreateMap<Domain.Models.Customer, CustomerDetailsVm>()
-                .ForMember(dest => dest.CustomerFullName, opt => opt.MapFrom(src => $"{src.FirstName} {src.LastName}"))
-                .ForMember(dest => dest.CEOFullName, opt => opt.MapFrom(src => $"{src.CEOName} {src.CEOLastName}"))
-                .ForMember(dest => dest.Addresses, opt => opt.MapFrom(src => src.Addresses));
-        }
     }
 }
