@@ -28,15 +28,30 @@ namespace WebShop.Application.Services
             throw new NotImplementedException();
         }
 
-        public ListCustomerForListVm BrowseAllCustomersForList()
+        public ListCustomerForListVm BrowseAllCustomersForList(int? pageSize = null, int? pageNumber = null, string nameSearchString = "")
         {
+
+
+        // Skończyłem lekcje na 19:16
+
+
             var customers = _customerRepository.Browse()
+                .Where(c => string.IsNullOrEmpty(nameSearchString)
+                            || c.FirstName.Contains(nameSearchString)
+                            || c.LastName.Contains(nameSearchString))
                 .ProjectTo<CustomerForListVm>(_mapper.ConfigurationProvider).ToList();
+
+            var customersToShow = (pageSize == null && pageNumber == null)
+                ? customers
+                : customers.Skip((int)(pageSize * (pageNumber - 1))).Take((int)pageSize).ToList();
 
             return new ListCustomerForListVm
             {
-                Customers = customers,
-                Count = customers.Count
+                Customers = customersToShow,
+                Count = customers.Count,
+                CurrentPage = (int)pageNumber,
+                PageSize = (int)pageSize,
+                NameSearchString = nameSearchString
             };
         }
 

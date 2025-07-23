@@ -13,6 +13,7 @@ namespace WebShop.Controllers
             _customerService = customerService;
         }
 
+        [HttpGet]
         public IActionResult Index()
         {
             // utworzyć widok dla tej akcji
@@ -25,6 +26,14 @@ namespace WebShop.Controllers
             // serwis musi zwrócić dane w odpowiednim formacie
 
             var model = _customerService.BrowseAllCustomersForList();
+            return View(model);
+        }
+
+        [HttpPost]
+        public IActionResult Index(int pageSize, int pageNumber, string nameSearchString)
+        {
+
+            var model = _customerService.BrowseAllCustomersForList(pageSize, pageNumber, nameSearchString);
             return View(model);
         }
 

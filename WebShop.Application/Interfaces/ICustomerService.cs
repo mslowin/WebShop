@@ -10,7 +10,7 @@ namespace WebShop.Application.Interfaces
 {
     public interface ICustomerService
     {
-        public ListCustomerForListVm BrowseAllCustomersForList();
+        public ListCustomerForListVm BrowseAllCustomersForList(int? pageSize = null, int? pageNumber = null, string nameSearchString = "");
         
         public int AddNewCustomer(NewCustomerVm customer);
         
