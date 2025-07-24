@@ -13,6 +13,7 @@ namespace WebShop.Application.ViewModels.Customer
     {
         public int Id { get; set; }
         public string? CompanyName { get; set; }
+        public string CustomerFullName { get; set; } = string.Empty;
         public string? Nip { get; set; }
     }
 }

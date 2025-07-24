@@ -25,13 +25,22 @@ namespace WebShop.Controllers
             // serwis będzie musiał przygotować dane
             // serwis musi zwrócić dane w odpowiednim formacie
 
-            var model = _customerService.BrowseAllCustomersForList();
+            var model = _customerService.BrowseAllCustomersForList(2, 1, "");
             return View(model);
         }
 
         [HttpPost]
-        public IActionResult Index(int pageSize, int pageNumber, string nameSearchString)
+        public IActionResult Index(int pageSize, int? pageNumber, string nameSearchString)
         {
+            if (!pageNumber.HasValue)
+            {
+                pageNumber = 1;
+            }
+
+            if (nameSearchString == null)
+            {
+                nameSearchString = string.Empty;
+            }
 
             var model = _customerService.BrowseAllCustomersForList(pageSize, pageNumber, nameSearchString);
             return View(model);
@@ -41,7 +50,7 @@ namespace WebShop.Controllers
         public IActionResult AddCustomer() 
         {
             // zwraca widok z formularzem tworzenia nowego klienta
-            return View();
+            return View(new NewCustomerVm());
         }
 
         [HttpPost]

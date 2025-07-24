@@ -30,15 +30,11 @@ namespace WebShop.Application.Services
 
         public ListCustomerForListVm BrowseAllCustomersForList(int? pageSize = null, int? pageNumber = null, string nameSearchString = "")
         {
-
-
-        // Skończyłem lekcje na 19:16
-
-
             var customers = _customerRepository.Browse()
                 .Where(c => string.IsNullOrEmpty(nameSearchString)
-                            || c.FirstName.Contains(nameSearchString)
-                            || c.LastName.Contains(nameSearchString))
+                            || (c.CompanyName != null && c.CompanyName.StartsWith(nameSearchString))
+                            || c.FirstName.StartsWith(nameSearchString)
+                            || c.LastName.StartsWith(nameSearchString))
                 .ProjectTo<CustomerForListVm>(_mapper.ConfigurationProvider).ToList();
 
             var customersToShow = (pageSize == null && pageNumber == null)

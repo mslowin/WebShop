@@ -56,14 +56,33 @@
     <div class="row">
         <table>
             <tr>
-                @for (int i = 1; i < Math.Ceiling(Model.Count / Model.PageSize); i++)
+                @for (int i = 1; i <= Math.Ceiling(Model.Count / (double)Model.PageSize); i++)
                 {
                     <td>
-                        <a asp-action="Index" asp-route-pageNumber="@i">@i</a>
+                        @if (i != Model.CurrentPage)
+                        {
+                            <a href="javascript:PagerClick(@i)">@i</a>
+                        }
+                        else
+                        {
+                            <span>@i</span>
+                        }
                     </td>
                 }
-)
             </tr>
         </table>
+        <input type="hidden" name="pageNumber" id="pageNumber" />
+        <input type="hidden" name="pageSize" id="pageSize" value="2" />
     </div>
 </form>
+
+@section Scripts
+{
+    <script type="text/javascript">
+        function PagerClick(index)
+        {
+            document.getElementById("pageNumber").value = index;
+            document.forms[0].submit();
+        }
+    </script>
+}

@@ -14,7 +14,8 @@ namespace WebShop.Application.Mapping
     {
         public MappingProfile()
         {
-            CreateMap<Customer, CustomerForListVm>();
+            CreateMap<Customer, CustomerForListVm>()
+                .ForMember(dest => dest.CustomerFullName, opt => opt.MapFrom(src => $"{src.FirstName} {src.LastName}"));
 
             CreateMap<Customer, CustomerDetailsVm>()
                 .ForMember(dest => dest.CustomerFullName, opt => opt.MapFrom(src => $"{src.FirstName} {src.LastName}"))
