@@ -13,6 +13,6 @@ namespace WebShop.Application.ViewModels.Customer
         public string LastName { get; set; } = string.Empty;
         public string CompanyName { get; set; } = string.Empty;
         public string Nip { get; set; } = string.Empty;
-        public string REGON { get; set; } = string.Empty;
+        public string Regon { get; set; } = string.Empty;
     }
 }

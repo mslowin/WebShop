@@ -17,6 +17,8 @@ namespace WebShop.Application.Mapping
             CreateMap<Customer, CustomerForListVm>()
                 .ForMember(dest => dest.CustomerFullName, opt => opt.MapFrom(src => $"{src.FirstName} {src.LastName}"));
 
+            CreateMap<NewCustomerVm, Customer>();
+
             CreateMap<Customer, CustomerDetailsVm>()
                 .ForMember(dest => dest.CustomerFullName, opt => opt.MapFrom(src => $"{src.FirstName} {src.LastName}"))
                 .ForMember(dest => dest.CEOFullName, opt => opt.MapFrom(src => $"{src.CEOName} {src.CEOLastName}"))

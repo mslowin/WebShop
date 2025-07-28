@@ -61,6 +61,7 @@ namespace WebShop.Controllers
                 var id = _customerService.AddNewCustomer(customer);
                 return RedirectToAction("Index");
             }
+
             return View(customer);
         }
 

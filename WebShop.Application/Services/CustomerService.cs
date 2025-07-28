@@ -3,6 +3,7 @@ using AutoMapper.QueryableExtensions;
 using WebShop.Application.Interfaces;
 using WebShop.Application.ViewModels.Address;
 using WebShop.Application.ViewModels.Customer;
+using WebShop.Domain.Models;
 using WebShop.Domain.RepositoryInterfaces;
 
 namespace WebShop.Application.Services
@@ -20,7 +21,9 @@ namespace WebShop.Application.Services
 
         public int AddNewCustomer(NewCustomerVm customerVm)
         {
-            throw new NotImplementedException();
+            var customer = _mapper.Map<Customer>(customerVm);
+            var id = _customerRepository.Add(customer);
+            return id;
         }
 
         public int AddNewAddress(AddressForListVm addressVm)
