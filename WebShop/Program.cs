@@ -1,11 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using WebShop.Application.Interfaces;
-using WebShop.Application.Services;
-using WebShop.Domain.RepositoryInterfaces;
-using WebShop.Infrastructure;
-using WebShop.Infrastructure.Repositories;
 using WebShop.Application;
+using WebShop.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,7 +18,6 @@ builder.Services.AddApplication();
 builder.Services.AddInfrastructure();
 
 builder.Services.AddControllersWithViews();
-builder.Services.AddTransient<IItemService, ItemService>();
 
 var app = builder.Build();
 
