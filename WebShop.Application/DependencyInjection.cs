@@ -1,9 +1,7 @@
-﻿using FluentValidation;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using WebShop.Application.Interfaces;
 using WebShop.Application.Mapping;
 using WebShop.Application.Services;
-using WebShop.Application.Validators.Customer;
 using WebShop.Application.ViewModels.Customer;
 
 namespace WebShop.Application
@@ -18,9 +16,6 @@ namespace WebShop.Application
 
             // Register AutoMapper
             services.AddAutoMapper(typeof(MappingProfile));
-
-            // Register FluentValidation validators
-            services.AddScoped<IValidator<NewCustomerVm>, NewCustomerValidator>();
             return services;
         }
     }

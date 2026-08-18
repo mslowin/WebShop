@@ -1,20 +1,15 @@
-﻿using FluentValidation;
-using FluentValidation.Results;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using WebShop.Application.Interfaces;
 using WebShop.Application.ViewModels.Customer;
-using WebShop.Extensions;
 
 namespace WebShop.Controllers
 {
     public class CustomerController : Controller
     {
-        private IValidator<NewCustomerVm> _validator;
         private readonly ICustomerService _customerService;
 
-        public CustomerController(IValidator<NewCustomerVm> validator, ICustomerService customerService)
+        public CustomerController(ICustomerService customerService)
         {
-            _validator = validator;
             _customerService = customerService;
         }
 
@@ -61,16 +56,6 @@ namespace WebShop.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> AddCustomer(NewCustomerVm customer)
         {
-            ValidationResult result = await _validator.ValidateAsync(customer);
-            
-            if (!result.IsValid)
-            {
-                // Copy the validation results into ModelState
-                result.AddToModelState(this.ModelState);
-                // Return the view with the validation errors
-                return View("AddCustomer", customer);
-            }
-
             if (ModelState.IsValid)
             {
                 try
