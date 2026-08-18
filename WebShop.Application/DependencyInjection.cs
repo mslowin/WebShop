@@ -2,7 +2,6 @@
 using WebShop.Application.Interfaces;
 using WebShop.Application.Mapping;
 using WebShop.Application.Services;
-using WebShop.Application.ViewModels.Customer;
 
 namespace WebShop.Application
 {
@@ -11,7 +10,6 @@ namespace WebShop.Application
         public static IServiceCollection AddApplication(this IServiceCollection services)
         {
             // Add services to the container.
-            services.AddTransient<IItemService, ItemService>();
             services.AddTransient<ICustomerService, CustomerService>();
 
             // Register AutoMapper
