@@ -48,7 +48,7 @@ public class CategoryRepository : ICategoryRepository
         var category = _context.Categories.Find(id);
         if (category != null)
         {
-            _context.Categories.Remove(category);
+            category.MarkAsDeleted();
             _context.SaveChanges();
         }
     }

@@ -48,7 +48,7 @@ public class PaymentMethodRepository : IPaymentMethodRepository
         var paymentMethod = _context.PaymentMethods.Find(id);
         if (paymentMethod != null)
         {
-            _context.PaymentMethods.Remove(paymentMethod);
+            paymentMethod.MarkAsDeleted();
             _context.SaveChanges();
         }
     }

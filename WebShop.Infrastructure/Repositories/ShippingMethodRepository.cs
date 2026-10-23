@@ -48,7 +48,7 @@ public class ShippingMethodRepository : IShippingMethodRepository
         var shippingMethod = _context.ShippingMethods.Find(id);
         if (shippingMethod != null)
         {
-            _context.ShippingMethods.Remove(shippingMethod);
+            shippingMethod.MarkAsDeleted();
             _context.SaveChanges();
         }
     }

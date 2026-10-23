@@ -19,5 +19,7 @@ namespace WebShop.Application.Interfaces
         public CustomerDetailsVm GetCustomerDetails(int customerId);
 
         public UpsertCustomerVm GetCustomerForEdit(int customerId);
+
+        public void DeleteCustomer(int customerId);
     }
 }

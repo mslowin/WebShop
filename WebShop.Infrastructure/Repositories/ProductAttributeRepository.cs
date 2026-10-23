@@ -48,7 +48,7 @@ public class ProductAttributeRepository : IProductAttributeRepository
         var attribute = _context.ProductAttributes.Find(id);
         if (attribute != null)
         {
-            _context.ProductAttributes.Remove(attribute);
+            attribute.MarkAsDeleted();
             _context.SaveChanges();
         }
     }

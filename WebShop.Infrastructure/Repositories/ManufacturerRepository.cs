@@ -48,7 +48,7 @@ public class ManufacturerRepository : IManufacturerRepository
         var manufacturer = _context.Manufacturers.Find(id);
         if (manufacturer != null)
         {
-            _context.Manufacturers.Remove(manufacturer);
+            manufacturer.MarkAsDeleted();
             _context.SaveChanges();
         }
     }

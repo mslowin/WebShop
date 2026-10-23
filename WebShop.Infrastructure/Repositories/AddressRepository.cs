@@ -48,7 +48,7 @@ public class AddressRepository : IAddressRepository
         var address = _context.Addresses.Find(id);
         if (address != null)
         {
-            _context.Addresses.Remove(address);
+            address.MarkAsDeleted();
             _context.SaveChanges();
         }
     }

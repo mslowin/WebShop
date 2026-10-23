@@ -49,6 +49,11 @@ namespace WebShop.Controllers
         [HttpGet]
         public IActionResult UpsertCustomer(int? id)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
             if (id.HasValue)
             {
                 var customer = _customerService.GetCustomerForEdit(id.Value);
@@ -83,6 +88,19 @@ namespace WebShop.Controllers
             }
 
             return View(customer);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult DeleteCustomer(int id)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            _customerService.DeleteCustomer(id);
+            return RedirectToAction("Index");
         }
 
         ////[HttpGet]

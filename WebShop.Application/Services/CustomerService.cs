@@ -75,5 +75,10 @@ namespace WebShop.Application.Services
             var customer = _customerRepository.Get(customerId);
             return _mapper.Map<UpsertCustomerVm>(customer);
         }
+
+        public void DeleteCustomer(int customerId)
+        {
+            _customerRepository.Delete(customerId);
+        }
     }
 }

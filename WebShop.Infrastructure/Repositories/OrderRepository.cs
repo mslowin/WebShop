@@ -48,7 +48,7 @@ public class OrderRepository : IOrderRepository
         var order = _context.Orders.Find(id);
         if (order != null)
         {
-            _context.Orders.Remove(order);
+            order.MarkAsDeleted();
             _context.SaveChanges();
         }
     }

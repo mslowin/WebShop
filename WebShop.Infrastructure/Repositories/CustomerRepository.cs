@@ -1,4 +1,5 @@
-﻿using WebShop.Domain.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using WebShop.Domain.Models;
 using WebShop.Domain.RepositoryInterfaces;
 
 namespace WebShop.Infrastructure.Repositories;
@@ -32,7 +33,7 @@ public class CustomerRepository : ICustomerRepository
     /// <inheritdoc/>
     public IQueryable<Customer> Browse()
     {
-        return _context.Customers.Where(c => !c.IsDeleted).AsQueryable();
+        return _context.Customers.AsQueryable();
     }
 
     /// <inheritdoc/>
@@ -45,11 +46,29 @@ public class CustomerRepository : ICustomerRepository
     /// <inheritdoc/>
     public void Delete(int id)
     {
-        var customer = _context.Customers.Find(id);
-        if (customer != null)
+        var customer = _context.Customers
+            .Include(c => c.Addresses)
+            .Include(c => c.Cart)
+                .ThenInclude(cart => cart!.Items)
+            .FirstOrDefault(c => c.Id == id);
+
+        if (customer == null)
         {
-            _context.Customers.Remove(customer);
-            _context.SaveChanges();
+            return;
         }
+
+        foreach (var address in customer.Addresses)
+        {
+            address.MarkAsDeleted();
+        }
+
+        if (customer.Cart != null)
+        {
+            _context.Carts.Remove(customer.Cart);
+        }
+
+        customer.MarkAsDeleted();
+
+        _context.SaveChanges();
     }
 }

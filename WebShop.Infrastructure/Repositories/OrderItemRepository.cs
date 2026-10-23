@@ -48,7 +48,7 @@ public class OrderItemRepository : IOrderItemRepository
         var orderItem = _context.OrderItems.Find(id);
         if (orderItem != null)
         {
-            _context.OrderItems.Remove(orderItem);
+            orderItem.MarkAsDeleted();
             _context.SaveChanges();
         }
     }

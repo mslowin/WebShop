@@ -6,5 +6,17 @@ public class BaseEntity
     public string? CreatedBy { get; set; } = null;
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
     public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
-    public bool IsDeleted { get; set; } = false;
+    public bool IsDeleted { get; private set; } = false;
+
+    public void MarkAsDeleted()
+    {
+        IsDeleted = true;
+        UpdatedAt = DateTime.UtcNow;
+    }
+
+    public void Restore()
+    {
+        IsDeleted = false;
+        UpdatedAt = DateTime.UtcNow;
+    }
 }

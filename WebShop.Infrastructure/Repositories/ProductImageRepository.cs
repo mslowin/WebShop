@@ -48,7 +48,7 @@ public class ProductImageRepository : IProductImageRepository
         var image = _context.ProductImages.Find(id);
         if (image != null)
         {
-            _context.ProductImages.Remove(image);
+            image.MarkAsDeleted();
             _context.SaveChanges();
         }
     }

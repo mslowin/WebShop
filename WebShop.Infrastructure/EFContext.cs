@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Common;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -43,6 +44,18 @@ public class EFContext : IdentityDbContext
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
+
+        foreach (var clrType in builder.Model.GetEntityTypes()
+                     .Select(e => e.ClrType)
+                     .Where(t => typeof(BaseEntity).IsAssignableFrom(t)))
+        {
+            var entity = Expression.Parameter(clrType, "e");
+            var isNotDeleted = Expression.Lambda(
+                Expression.Not(Expression.Property(entity, nameof(BaseEntity.IsDeleted))),
+                entity);
+
+            builder.Entity(clrType).HasQueryFilter(isNotDeleted);
+        }
 
         builder.Entity<Product>().Property(p => p.PriceGross).HasPrecision(18, 2);
         builder.Entity<Product>().Property(p => p.PriceNet).HasPrecision(18, 2);

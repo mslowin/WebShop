@@ -63,7 +63,7 @@ public class ProductRepository : IProductRepository
         var product = _context.Products.Find(id);
         if (product != null)
         {
-            _context.Products.Remove(product);
+            product.MarkAsDeleted();
             _context.SaveChanges();
         }
     }
