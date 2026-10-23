@@ -25,7 +25,7 @@ namespace WebShop.Controllers
             // serwis będzie musiał przygotować dane
             // serwis musi zwrócić dane w odpowiednim formacie
 
-            var model = _customerService.BrowseAllCustomersForList(2, 1, "");
+            var model = _customerService.BrowseAllCustomersForList(10, 1, "");
             return View(model);
         }
 
@@ -47,23 +47,34 @@ namespace WebShop.Controllers
         }
 
         [HttpGet]
-        public IActionResult AddCustomer() 
+        public IActionResult UpsertCustomer(int? id)
         {
-            return View(new NewCustomerVm());
+            if (id.HasValue)
+            {
+                var customer = _customerService.GetCustomerForEdit(id.Value);
+                if (customer == null)
+                {
+                    return NotFound();
+                }
+
+                return View(customer);
+            }
+
+            return View(new UpsertCustomerVm());
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> AddCustomer(NewCustomerVm customer)
+        public IActionResult UpsertCustomer(UpsertCustomerVm customer)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
-                    var id = _customerService.AddNewCustomer(customer);
+                    _customerService.UpsertCustomer(customer);
                     return RedirectToAction("Index");
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     // Log the exception
                     ModelState.AddModelError("", "An error occurred while saving the customer.");

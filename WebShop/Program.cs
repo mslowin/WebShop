@@ -5,7 +5,6 @@ using WebShop.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// AddNewCustomer services to the container.
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
 
 builder.Services.AddDbContext<EFContext>(options => options.UseSqlServer(connectionString));

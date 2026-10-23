@@ -1,8 +1,8 @@
-﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations;
 
 namespace WebShop.Application.ViewModels.Customer
 {
-    public class NewCustomerVm
+    public class UpsertCustomerVm
     {
         public int Id { get; set; }
 
@@ -20,7 +20,7 @@ namespace WebShop.Application.ViewModels.Customer
         [RegularExpression(@"^\d{10}$", ErrorMessage = "NIP must be a 10-digit number.")]
         public string Nip { get; set; } = string.Empty;
 
-        [RegularExpression(@"^\d{9}$", ErrorMessage = "REGON must be a 9-digit number elo.")]
+        [RegularExpression(@"^\d{9}$", ErrorMessage = "REGON must be a 9-digit number.")]
         public string Regon { get; set; } = string.Empty;
     }
 }

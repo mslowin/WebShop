@@ -12,10 +12,12 @@ namespace WebShop.Application.Interfaces
     {
         public ListCustomerForListVm BrowseAllCustomersForList(int? pageSize = null, int? pageNumber = null, string nameSearchString = "");
         
-        public int AddNewCustomer(NewCustomerVm customer);
-        
+        public int UpsertCustomer(UpsertCustomerVm customer);
+
         public int AddNewAddress(AddressForListVm address);
-        
+
         public CustomerDetailsVm GetCustomerDetails(int customerId);
+
+        public UpsertCustomerVm GetCustomerForEdit(int customerId);
     }
 }

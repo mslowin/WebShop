@@ -6,7 +6,7 @@
 <h1>Index</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="UpsertCustomer">Create New</a>
 </p>
 <form asp-action="Index" asp-controller="Customer" method="post">
     <div class="row">
@@ -44,8 +44,8 @@
                         @Html.DisplayFor(modelItem => item.Nip)
                     </td>
                     <td>
-                        @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                        @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                        @Html.ActionLink("Edit", "UpsertCustomer", new { id = item.Id }) |
+                        @Html.ActionLink("Details", "ViewCustomer", new { customerId = item.Id }) |
                         @Html.ActionLink("Delete", "Delete", new { id = item.Id })
                     </td>
                 </tr>
@@ -72,7 +72,7 @@
             </tr>
         </table>
         <input type="hidden" name="pageNumber" id="pageNumber" />
-        <input type="hidden" name="pageSize" id="pageSize" value="2" />
+        <input type="hidden" name="pageSize" id="pageSize" value="10" />
     </div>
 </form>
 

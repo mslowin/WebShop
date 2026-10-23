@@ -19,11 +19,21 @@ namespace WebShop.Application.Services
             _mapper = mapper;
         }
 
-        public int AddNewCustomer(NewCustomerVm customerVm)
+        public int UpsertCustomer(UpsertCustomerVm customerVm)
         {
-            var customer = _mapper.Map<Customer>(customerVm);
-            var id = _customerRepository.Add(customer);
-            return id;
+            if (customerVm.Id == 0)
+            {
+                return _customerRepository.Add(_mapper.Map<Customer>(customerVm));
+            }
+
+            var customer = _customerRepository.Get(customerVm.Id)
+                ?? throw new KeyNotFoundException($"Customer with id {customerVm.Id} was not found.");
+
+            _mapper.Map(customerVm, customer);
+            customer.UpdatedAt = DateTime.UtcNow;
+
+            _customerRepository.Update(customer);
+            return customer.Id;
         }
 
         public int AddNewAddress(AddressForListVm addressVm)
@@ -57,8 +67,13 @@ namespace WebShop.Application.Services
         public CustomerDetailsVm GetCustomerDetails(int customerId)
         {
             var customer = _customerRepository.Get(customerId);
-
             return _mapper.Map<CustomerDetailsVm>(customer);
+        }
+
+        public UpsertCustomerVm GetCustomerForEdit(int customerId)
+        {
+            var customer = _customerRepository.Get(customerId);
+            return _mapper.Map<UpsertCustomerVm>(customer);
         }
     }
 }
